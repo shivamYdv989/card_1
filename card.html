@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Product Card</title>
+    
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="product-badge">20% OFF</div>
+        <div class="product-image">
+          <img
+            src="https://images.unsplash.com/photo-1543076447-215ad9ba6923?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+            alt="Blue Denim Jacket">
+        </div>
+        <h2 class="product-name">Blue Denim Jacket</h2>
+        <p class="product-description">Premium quality denim jacket with a
+          modern slim fit design.</p>
+
+        <div class="rating">
+          <i class="fas fa-star">⭐</i>
+          <i class="fas fa-star">⭐</i>
+          <i class="fas fa-star">⭐</i>
+          <i class="fas fa-star">⭐</i>
+          <i class="fas fa-star-half-alt">⭐</i>
+          <span style="color: inherit; margin-left: 5px;">4.5</span>
+        </div>
+
+        <div class="price-container">
+          <span class="current-price">₹1,499</span>
+          <span class="original-price">₹1,899</span>
+        </div>
+
+        <button class="add-to-cart" id="addToCart">
+          <i class="fas fa-shopping-cart"></i> Add to Cart
+        </button>
+
+        <div class="cart-counter">Cart Count: <span
+            id="cartCount">0</span></div>
+
+        <div class="product-actions">
+          <button class="action-btn" title="Add to Wishlist"><i
+              class="far fa-heart"></i></button>
+          <button class="action-btn" title="Quick View"><i
+              class="far fa-eye"></i></button>
+          <button class="action-btn" title="Share"><i
+              class="fas fa-share-alt"></i></button>
+        </div>
+      </div>
+
+      <button class="mode-toggle" onclick="toggleMode()">
+        <i class="fas fa-moon"></i> Toggle Dark Mode
+      </button>
+    </div>
+
+    <script>
+    let count = 0;
+    const addToCartBtn = document.getElementById('addToCart');
+    const cartCount = document.getElementById('cartCount');
+
+    addToCartBtn.addEventListener('click', () => {
+      count++;
+      cartCount.textContent = count;
+      
+      // Animation effect
+      addToCartBtn.innerHTML = '<i class="fas fa-check"></i> Added!';
+      addToCartBtn.style.backgroundColor = '#4BB543';
+      
+      setTimeout(() => {
+        addToCartBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Add to Cart';
+        addToCartBtn.style.backgroundColor = '';
+      }, 1500);
+    });
+
+    function toggleMode() {
+      document.body.classList.toggle('dark-mode');
+      const modeToggle = document.querySelector('.mode-toggle');
+      const icon = modeToggle.querySelector('i');
+      
+      if(document.body.classList.contains('dark-mode')) {
+        icon.classList.replace('fa-moon', 'fa-sun');
+        modeToggle.innerHTML = '<i class="fas fa-sun"></i> Toggle Light Mode';
+      } else {
+        icon.classList.replace('fa-sun', 'fa-moon');
+        modeToggle.innerHTML = '<i class="fas fa-moon"></i> Toggle Dark Mode';
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-light: #4895ef;
+      --primary-dark: #3a0ca3;
+      --bg-light: #f8f9fa;
+      --bg-dark: #212529;
+      --card-light: #ffffff;
+      --card-dark: #2b2d42;
+      --text-light: #495057;
+      --text-dark: #f8f9fa;
+      --accent: #f72585;
+      --success: #4cc9f0;
+      --border-radius: 12px;
+      --box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      transition: var(--transition);
+      flex-direction: column;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+    }
+    
+    .card {
+      position: relative;
+      background-color: var(--card-light);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 25px;
+      width: 100%;
+      max-width: 350px;
+      text-align: center;
+      transition: var(--transition);
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .product-image {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .card:hover .product-image img {
+      transform: scale(1.05);
+    }
+    
+    .product-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background-color: var(--accent);
+      color: white;
+      padding: 5px 12px;
+      font-size: 0.8rem;
+      border-radius: 20px;
+      font-weight: 600;
+      z-index: 1;
+    }
+    
+    .product-name {
+      font-size: 1.4rem;
+      margin: 0 0 10px;
+      font-weight: 600;
+      color: inherit;
+    }
+    
+    .product-description {
+      font-size: 0.9rem;
+      color: inherit;
+      opacity: 0.8;
+      margin-bottom: 15px;
+    }
+    
+    .price-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .current-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    .original-price {
+      font-size: 1rem;
+      text-decoration: line-through;
+      color: inherit;
+      opacity: 0.6;
+    }
+    
+    .rating {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: #ffc107;
+    }
+    
+    .rating i {
+      margin: 0 2px;
+    }
+    
+    .add-to-cart {
+      width: 100%;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .add-to-cart:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+    
+    .add-to-cart:active {
+      transform: translateY(0);
+    }
+    
+    .cart-counter {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: var(--primary);
+      font-weight: 500;
+    }
+    
+    .product-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    
+    .action-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 5px;
+    }
+    
+    .action-btn:hover {
+      color: var(--primary-dark);
+      transform: scale(1.1);
+    }
+    
+    .mode-toggle {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+    }
+    
+    .mode-toggle:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+    }
+    
+    .dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    
+    .dark-mode .card {
+      background-color: var(--card-dark);
+    }
+    
+    .dark-mode .price {
+      color: #ccc;
+    }
+    
+    .dark-mode .mode-toggle {
+      background: var(--primary-dark);
+    }
+    
+    @media (max-width: 400px) {
+      .card {
+        width: 100%;
+      }
+      
+      .product-image {
+        height: 200px;
+      }
+    }
+  </style>
+  </body>
+</html>
